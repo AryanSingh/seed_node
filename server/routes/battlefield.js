@@ -8,14 +8,20 @@ const router = express.Router()
 // Route to get all countries
 router.get('/list', (req, res, next) => {
 	Battle.find({}).select('location -_id').exec(function(err, locations){
-		if(err) return next(err)
-		locationArr = []
+		if(err) return next(err);
+		locationArr = [];
 		locations.map((location) => {
 			if(locationArr.indexOf(location.location) === -1 && location.location !== ""){
 				locationArr.push(location.location)
 			}
 		});
-		res.json({success: true, locations: locationArr})
+		res.json({success: true, data: locationArr})
+	})
+});
+router.get('/', (req, res, next) => {
+	Battle.find({}).exec(function(err, battles){
+		if(err) return next(err);
+		res.json({success: true, data: battles})
 	})
 });
 
@@ -24,7 +30,7 @@ router.get('/count', (req, res, next) => {
 		if (err) {
 			console.log(err);
 		} else {
-			res.json({ success: true, count: result });
+			res.json({ success: true, data: result });
 		}
 	});
 });
@@ -36,7 +42,7 @@ router.get('/search', (req, res, next) => {
 		...req.query.location ? { location: { $regex: new RegExp("^" + req.query.location.toLowerCase(), "i") }}: {},
 		...req.query.type ? { battle_type: { $regex: new RegExp("^" + req.query.type.toLowerCase(), "i") }}: {} }, function(err, docs){
 		if(!err){
-			res.json({success: true, battles:docs})
+			res.json({success: true, data:docs})
 		}
 	});
 	console.log(req.query)

@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import {fetchBattles} from "../../actions";
+import {fetchBattles, fetchLocations} from "../../actions";
+import BattleCard from './BattleCard';
+import styled from 'styled-components';
 import api from '../../api'
 
 export class Battles extends Component {
@@ -9,31 +11,52 @@ export class Battles extends Component {
     this.state = {
     }
   }
+
+	componentDidMount() {
+		this.props.fetchBattles();
+	}
+
+	componentDidUpdate(prevProps, prevState){
+  	if(prevProps.battles !== this.props.battles){
+  		// debugger
+		}
+	}
+
   render() {
     return (
-      <div className="Countries">
-        <h2>List of locations</h2>
+      <OutsideContainer>
+        <h2>List of Battles</h2>
+				<ContainerBattles>
         {this.props.battles.map(battle => (
-          <li key={battle}>{battle}</li>
+        	<BattleCard battle={battle} key={battle.name}/>
         ))}
-      </div>
+				</ContainerBattles>
+			</OutsideContainer>
     )
   }
-  componentDidMount() {
-    this.props.fetchBattles();
-  }
+
 }
 const mapDispatchToProps = dispatch => {
 	return {
-		fetchBattles: () => dispatch(fetchBattles())
+		fetchBattles: () => dispatch(fetchBattles()),
+		fetchLocations: () => dispatch(fetchLocations())
 	}
 };
 
 
 const mapStateToProps = state => {
   return {
-  	battles: state.battles
+  	battles: state.battles,
+		locations: state.locations
 	}
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Battles);
+
+const ContainerBattles = styled.div`
+	
+`;
+
+const OutsideContainer = styled.div`
+	
+`;
