@@ -25,7 +25,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact component={Battles} />
           <Route path="/battles" component={Battles} />
           <Route path="/add-country" component={AddCountry} />
           <Route path="/signup" component={Signup} />
