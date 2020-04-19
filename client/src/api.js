@@ -74,7 +74,7 @@ export default {
 
   addCountry(body) {
     return service
-      .post('/countries', body)
+      .post('/battles', body)
       .then(res => res.data)
       .catch(errHandler)
   },
