@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Link, NavLink, Switch } from 'react-router-dom'
 import Home from './pages/Home'
-import Countries from './pages/Countries'
+import Battles from './pages/Battles'
 import AddCountry from './pages/AddCountry'
 import Secret from './pages/Secret'
 import Login from './pages/Login'
@@ -30,7 +30,7 @@ export default class App extends Component {
           <NavLink to="/" exact>
             Home
           </NavLink>
-          <NavLink to="/countries">Countries</NavLink>
+          <NavLink to="/battles">Countries</NavLink>
           <NavLink to="/add-country">Add country</NavLink>
           {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
           {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
@@ -43,7 +43,7 @@ export default class App extends Component {
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/countries" component={Countries} />
+          <Route path="/battles" component={Battles} />
           <Route path="/add-country" component={AddCountry} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
