@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Link, NavLink, Switch } from 'react-router-dom'
+import img from '../images/background.png';
+
 import Home from './pages/Home'
 import Battles from './pages/Battles'
 import AddCountry from './pages/AddCountry'
@@ -7,6 +9,7 @@ import Secret from './pages/Secret'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import api from '../api'
+import styled from 'styled-components';
 import logo from '../logo.svg'
 
 export default class App extends Component {
@@ -23,7 +26,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <AppWrapper className="App">
         <Switch>
           <Route path="/" exact component={Battles} />
           <Route path="/battles" component={Battles} />
@@ -33,7 +36,14 @@ export default class App extends Component {
           <Route path="/secret" component={Secret} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
-      </div>
+      </AppWrapper>
     )
   }
 }
+
+const AppWrapper = styled.div`
+  z-index: 1;
+`;
+
+
+

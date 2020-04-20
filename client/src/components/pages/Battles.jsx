@@ -91,7 +91,8 @@ const ContainerBattles = styled.div`
 `;
 
 const OutsideContainer = styled.div`
-	
+	position: relative;
+	z-index: 999;
 `;
 
 const InputContainer = styled.div`
