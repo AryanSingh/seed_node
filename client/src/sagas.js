@@ -24,7 +24,7 @@ function* fetchBattles() {
 }
 
 function* searchBattles(action){
-	let url = `${apiUrl}/api/battles/search?location=${action.param}`;
+	let url = `${apiUrl}/battles/search?location=${action.param}`;
 	if(!action.param){ url = `${apiUrl}/battles`}
 	const json = yield fetch(url)
 		.then(response => response.json());
