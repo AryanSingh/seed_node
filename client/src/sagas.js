@@ -4,16 +4,20 @@ import {
 	SEARCH_BATTLES_SUCCESS
 } from "./actions";
 
-const apiUrl = 'http://localhost:5000'
+// const apiUrl = 'http://localhost:5000'
+
+const apiUrl =  process.env.NODE_ENV === 'production'
+	? '/api'
+	: 'http://localhost:5000/api'
 
 function* fetchLocations() {
-	const json = yield fetch(`${apiUrl}/api/battles/list`)
+	const json = yield fetch(`${apiUrl}/battles/list`)
 		.then(response => response.json());
 	yield put({ type: FETCH_LOCATIONS_SUCCESS, data: json.data });
 }
 
 function* fetchBattles() {
-	const json = yield fetch(`${apiUrl}/api/battles`)
+	const json = yield fetch(`${apiUrl}/battles`)
 		.then(response => response.json());
 	console.log('data', json);
 	yield put({ type: FETCH_BATTLES_SUCCESS, data: json.data });
@@ -21,7 +25,7 @@ function* fetchBattles() {
 
 function* searchBattles(action){
 	let url = `${apiUrl}/api/battles/search?location=${action.param}`;
-	if(!action.param){ url = `${apiUrl}/api/battles`}
+	if(!action.param){ url = `${apiUrl}/battles`}
 	const json = yield fetch(url)
 		.then(response => response.json());
 	console.log('data', json);
