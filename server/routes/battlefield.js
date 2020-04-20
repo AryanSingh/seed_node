@@ -38,7 +38,8 @@ router.get('/count', (req, res, next) => {
 router.get('/search', (req, res, next) => {
 	let url_parts = url.parse(req.url, true)
 	let query = url_parts.query
-	Battle.find({ $or:[{'attacker_king': req.query.king}, {'defender_king': req.query.king}],
+	console.log(req.query)
+	Battle.find({...req.query.king? { $or:[{'attacker_king': req.query.king}, {'defender_king': req.query.king}]}: {},
 		...req.query.location ? { location: { $regex: new RegExp("^" + req.query.location.toLowerCase(), "i") }}: {},
 		...req.query.type ? { battle_type: { $regex: new RegExp("^" + req.query.type.toLowerCase(), "i") }}: {} }, function(err, docs){
 		if(!err){
